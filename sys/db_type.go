@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"database/sql/driver"
 	"encoding/json"
+	"time"
 )
 
 type Time sql.NullTime
@@ -31,10 +32,13 @@ func (n *Time) UnmarshalJSON(b []byte) error {
 		n.Valid = false
 		return nil
 	}
-	err := json.Unmarshal(b, &n.Time)
+	var s string
+	err := json.Unmarshal(b, &s)
 	if err == nil {
-		n.Time = n.Time.Local()
-		n.Valid = true
+		n.Time, err = time.ParseInLocation("2006-01-02 15:04:05", s, time.Local)
+		if err == nil {
+			n.Valid = true
+		}
 	}
 	return err
 }
