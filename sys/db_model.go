@@ -6,7 +6,7 @@ import (
 
 type Order struct {
 	ID                  uint64         `gorm:"primarykey" json:"id"`
-	OrderNo             string         `json:"order_no"`
+	OrderNo             string         `gorm:"primarykey" json:"order_no"`
 	OrderStatus         ST             `json:"order_status"`
 	OrderType           OT             `json:"order_type"`
 	OrderPrice          float64        `json:"order_price"`
