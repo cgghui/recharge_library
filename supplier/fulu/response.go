@@ -12,18 +12,18 @@ type ParentBody struct {
 type GoodsListGetResponse struct {
 	ProductID     int     `json:"product_id"`     // 商品Id
 	ProductName   string  `json:"product_name"`   // 商品名称
-	ProductType   PT      `json:"product_type"`   // 库存类型：卡密、直充
+	ProductType   sys.PT  `json:"product_type"`   // 库存类型：卡密、直充
 	FaceValue     float64 `json:"face_value"`     // 面值
 	PurchasePrice float64 `json:"purchase_price"` // 单价（单位：元）
-	SalesStatus   SAS     `json:"sales_status"`   // 销售状态：下架、上架、维护中、库存维护（本接口只取上架状态的商品）
-	StockStatus   STS     `json:"stock_status"`   // 库存状态：断货、警报、充足
+	SalesStatus   sys.SAS `json:"sales_status"`   // 销售状态：下架、上架、维护中、库存维护（本接口只取上架状态的商品）
+	StockStatus   sys.STS `json:"stock_status"`   // 库存状态：断货、警报、充足
 	TemplateID    string  `json:"template_id"`    // 商品模板Id，可能为空
 	Details       string  `json:"details"`        // 商品详情
 }
 
 type GoodsStockCheckResponse struct {
-	ProductID   int `json:"product_id"`   // 商品Id
-	StockStatus STS `json:"stock_status"` // 库存状态：断货、警报、充足
+	ProductID   int     `json:"product_id"`   // 商品Id
+	StockStatus sys.STS `json:"stock_status"` // 库存状态：断货、警报、充足
 }
 
 type GoodsInfoGetResponse struct {
