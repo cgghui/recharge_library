@@ -1,5 +1,7 @@
 package sys
 
+import "strconv"
+
 type ST string
 
 const (
@@ -8,6 +10,10 @@ const (
 	Failed     ST = "failed"     // 失败
 	Success    ST = "success"    // 成功
 )
+
+func (s ST) String() string {
+	return string(s)
+}
 
 //////////////////////////////////////////////////////////
 
@@ -20,6 +26,10 @@ const (
 	ZC OT = 4 // 直充
 )
 
+func (o OT) String() string {
+	return strconv.Itoa(int(o))
+}
+
 //////////////////////////////////////////////////////////
 
 type PT string
@@ -28,6 +38,10 @@ const (
 	CDKey          PT = "卡密"
 	DirectRecharge PT = "直充"
 )
+
+func (p PT) String() string {
+	return string(p)
+}
 
 //////////////////////////////////////////////////////////
 
@@ -40,6 +54,10 @@ const (
 	StockMaintenance SAS = "库存维护"
 )
 
+func (s SAS) String() string {
+	return string(s)
+}
+
 //////////////////////////////////////////////////////////
 
 type STS string
@@ -49,3 +67,7 @@ const (
 	Alert    STS = "警报"
 	Adequate STS = "充足"
 )
+
+func (s STS) String() string {
+	return string(s)
+}
