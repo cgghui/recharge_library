@@ -1,5 +1,7 @@
 package fulu
 
+import "github.com/cgghui/recharge_library/sys"
+
 type Param map[string]string
 
 func (p Param) Set(name, value string) {
@@ -31,7 +33,7 @@ type GoodsListGetParam struct {
 	SecondCategoryID int     `json:"second_category_id,omitempty"` // 商品分类Id（二级）（预留参数，暂无商品分类接口提供）
 	ThirdCategoryID  int     `json:"third_category_id,omitempty"`  // 商品分类Id（三级）（预留参数，暂无商品分类接口提供）
 	ProductName      string  `json:"product_name,omitempty"`       // 商品名称
-	ProductType      PT      `json:"product_type,omitempty"`       // 库存类型：卡密、直充
+	ProductType      sys.PT  `json:"product_type,omitempty"`       // 库存类型：卡密、直充
 	FaceValue        float64 `json:"face_value,omitempty"`         // 面值
 }
 

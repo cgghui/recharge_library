@@ -14,6 +14,8 @@ import (
 	"time"
 )
 
+const Name = "fulu"
+
 const OpenApiURL = "http://openapi.fulu.com/api/getway"
 const TestOpenApiURL = "http://pre.openapi.fulu.com/api/getway"
 
