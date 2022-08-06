@@ -11,6 +11,7 @@ type Order struct {
 	OrderType           OT             `json:"order_type"`
 	OrderPrice          float64        `json:"order_price"`
 	OrderFinishTime     Time           `json:"order_finish_time"`
+	NotifyRet           string         `json:"notify_ret"`
 	ChargeAppName       string         `json:"charge_app_name"`
 	ChargeCurrencyName  string         `json:"charge_currency_name"`
 	ChargeAccount       string         `json:"charge_account"`
