@@ -39,7 +39,7 @@ type OrderDetail struct {
 }
 
 type ThirdPartyOrder struct {
-	OrderNo    string `json:"order_no"`
+	OrderNo    string `json:"order_no" gorm:"primarykey"`
 	Name       string `json:"name"`
 	OriginData string `json:"origin_data"`
 	FinishTime Time   `json:"finish_time"`
