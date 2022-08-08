@@ -12,6 +12,7 @@ type Order struct {
 	OrderPrice          float64        `json:"order_price"`
 	OrderFinishTime     Time           `json:"order_finish_time"`
 	NotifyRet           string         `json:"-"`
+	LoopFinish          string         `json:"loop_finish"`
 	ChargeAppName       string         `json:"charge_app_name"`
 	ChargeCurrencyName  string         `json:"charge_currency_name"`
 	ChargeAccount       string         `json:"charge_account"`
