@@ -7,11 +7,7 @@ import (
 
 func TestNewApp(t *testing.T) {
 
-	app := NewApp(
-		OpenApiURL,
-		"3+UltK9rfqxYQhzDWxgxsb+EHPK9Va/vO18FJ8UGsxIQ0SC/GFtSRexWciFlnGlO",
-		"08f73b22cf9a4a9995dd651f6c578c06",
-	)
+	app := NewApp(OpenApiURL, "", "")
 
 	//{
 	//	ret, err := app.GoodsListGet(&GoodsListGetParam{
