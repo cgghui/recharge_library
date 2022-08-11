@@ -14,14 +14,10 @@ import (
 
 var (
 	Conn *gorm.DB
-	L    = "192.168.184.128"
-	U    = "hdl"
-	P    = "WSRpDA7jatNFTdRe"
+	L    = "127.0.0.1"
+	U    = "root"
+	P    = "root"
 )
-
-func init() {
-	_ = ConnectMySQL()
-}
 
 func ConnectMySQL() error {
 	logout, err := os.OpenFile("./db.log", os.O_RDWR|os.O_CREATE, 0666)
