@@ -65,7 +65,7 @@ type MerchantOrder struct {
 
 type MerchantOrderDetail struct {
 	ThirdPartyOrder
-	OrderDetail []OrderDetailForSupplier `gorm:"foreignKey:merchant_order_no;references:order_no" json:"order_detail"`
+	OrderDetail []Order `gorm:"foreignKey:merchant_order_no;references:order_no" json:"order_detail"`
 }
 
 type SupplierOrder struct {
