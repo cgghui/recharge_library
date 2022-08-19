@@ -24,7 +24,7 @@ type Order struct {
 	UpdatedAt           Time           `json:"updated_at"`
 	DeletedAt           gorm.DeletedAt `json:"deleted_at"`
 	MerchantName        string         `json:"merchant_name"`
-	MerchantGoodsID     string         `json:"merchant_goods_id"`
+	MerchantGoodsID     uint64         `json:"merchant_goods_id"`
 	MerchantOrderNo     string         `json:"merchant_order_no"`
 	SupplierName        string         `json:"supplier_name"`
 	SupplierGoodsID     uint64         `json:"supplier_goods_id"`
