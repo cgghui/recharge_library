@@ -40,6 +40,7 @@ type OrderDetail struct {
 	SupplierOrderDetail SupplierOrder `gorm:"foreignKey:order_no;references:supplier_order_no" json:"supplier_order_detail"`
 }
 
+// OrderDetailForSupplier 查询供应商订单详情
 type OrderDetailForSupplier struct {
 	Order
 	SupplierOrderDetail SupplierOrder `gorm:"foreignKey:order_no;references:supplier_order_no" json:"supplier_order_detail"`
@@ -49,9 +50,14 @@ func (OrderDetailForSupplier) TableName() string {
 	return "order"
 }
 
+// OrderDetailForMerchant 查询商户订单详情
 type OrderDetailForMerchant struct {
 	Order
 	MerchantOrderDetail MerchantOrder `gorm:"foreignKey:order_no;references:merchant_order_no" json:"merchant_order_detail"`
+}
+
+func (OrderDetailForMerchant) TableName() string {
+	return "order"
 }
 
 type ThirdPartyOrder struct {
