@@ -40,6 +40,16 @@ type OrderDetail struct {
 	SupplierOrderDetail SupplierOrder `gorm:"foreignKey:order_no;references:supplier_order_no" json:"supplier_order_detail"`
 }
 
+type OrderDetailForSupplier struct {
+	Order
+	SupplierOrderDetail SupplierOrder `gorm:"foreignKey:order_no;references:supplier_order_no" json:"supplier_order_detail"`
+}
+
+type OrderDetailForMerchant struct {
+	Order
+	MerchantOrderDetail MerchantOrder `gorm:"foreignKey:order_no;references:merchant_order_no" json:"merchant_order_detail"`
+}
+
 type ThirdPartyOrder struct {
 	OrderNo    string `json:"order_no" gorm:"primarykey"`
 	Name       string `json:"name"`
@@ -53,6 +63,16 @@ type MerchantOrder struct {
 	ThirdPartyOrder
 }
 
+type MerchantOrderDetail struct {
+	ThirdPartyOrder
+	OrderDetail []OrderDetailForSupplier `gorm:"foreignKey:merchant_order_no;references:order_no" json:"order_detail"`
+}
+
 type SupplierOrder struct {
 	ThirdPartyOrder
+}
+
+type SupplierOrderDetail struct {
+	ThirdPartyOrder
+	OrderDetail OrderDetailForMerchant `gorm:"foreignKey:supplier_order_no;references:order_no" json:"order_detail"`
 }
