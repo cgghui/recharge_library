@@ -45,6 +45,11 @@ type OrderDetailForSupplier struct {
 	SupplierOrderDetail SupplierOrder `gorm:"foreignKey:order_no;references:supplier_order_no" json:"supplier_order_detail"`
 }
 
+func (o *OrderDetailForSupplier) BeforeFind(tx *gorm.DB) (err error) {
+	tx = tx.Table("order")
+	return
+}
+
 type OrderDetailForMerchant struct {
 	Order
 	MerchantOrderDetail MerchantOrder `gorm:"foreignKey:order_no;references:merchant_order_no" json:"merchant_order_detail"`
@@ -65,7 +70,7 @@ type MerchantOrder struct {
 
 type MerchantOrderDetail struct {
 	ThirdPartyOrder
-	OrderDetail []Order `gorm:"foreignKey:merchant_order_no;references:order_no" json:"order_detail"`
+	OrderDetail []OrderDetailForSupplier `gorm:"foreignKey:merchant_order_no;references:order_no" json:"order_detail"`
 }
 
 type SupplierOrder struct {
