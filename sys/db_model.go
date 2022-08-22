@@ -110,8 +110,9 @@ type MerchantGoods struct {
 }
 
 type MerchantGoodsRelated struct {
-	ID              uint   `gorm:"primarykey"`
-	Code            string `gorm:"primarykey"`
+	ID              uint `gorm:"primarykey"`
+	Code            string
+	CodeDesc        string
 	SupplierName    string
 	SupplierGoodsID string
 	Sort            uint
