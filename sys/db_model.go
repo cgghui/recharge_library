@@ -93,6 +93,7 @@ type SupplierOrderDetail struct {
 // MerchantGoodsThread 单线程多线程的商品
 type MerchantGoodsThread struct {
 	ID           uint `gorm:"primarykey"`
+	MerchantName string
 	GoodsID      string
 	SingleThread YN
 }
