@@ -103,13 +103,14 @@ type MerchantGoods struct {
 	GoodsID      string
 	SkuCode      string
 	RelatedCode  string
+	Enable       YN
 	CreatedAt    Time
 	RelatedList  []MerchantGoodsRelated `gorm:"foreignKey:code;references:SkuCode"`
 }
 
 type MerchantGoodsRelated struct {
 	ID              uint   `gorm:"primarykey"`
-	code            string `gorm:"primarykey"`
+	Code            string `gorm:"primarykey"`
 	SupplierName    string
 	SupplierGoodsID string
 	Sort            uint
