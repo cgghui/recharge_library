@@ -105,7 +105,7 @@ type MerchantGoods struct {
 	RelatedCode  string
 	Enable       YN
 	CreatedAt    Time
-	RelatedList  []MerchantGoodsRelated `gorm:"foreignKey:code;references:SkuCode"`
+	RelatedList  []MerchantGoodsRelated `gorm:"foreignKey:code;references:sku_code"`
 }
 
 type MerchantGoodsRelated struct {
