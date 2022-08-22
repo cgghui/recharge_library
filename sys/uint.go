@@ -71,3 +71,18 @@ const (
 func (s STS) String() string {
 	return string(s)
 }
+
+//////////////////////////////////////////////////////////
+
+type YN string
+
+const (
+	Y YN = "Y"
+	N YN = "N"
+)
+
+func (s YN) String() string {
+	return string(s)
+}
+
+///////////////////////////////

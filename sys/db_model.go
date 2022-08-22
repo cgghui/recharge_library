@@ -4,6 +4,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// Order 系统订单
 type Order struct {
 	ID                  uint64         `gorm:"primarykey" json:"id"`
 	OrderNo             string         `gorm:"primarykey" json:"order_no"`
@@ -35,6 +36,7 @@ type Order struct {
 	SupplierOrderStatus string         `json:"supplier_order_status"`
 }
 
+// OrderDetail 订单详情
 type OrderDetail struct {
 	Order
 	MerchantOrderDetail MerchantOrder `gorm:"foreignKey:order_no;references:merchant_order_no" json:"merchant_order_detail"`
@@ -86,4 +88,34 @@ type SupplierOrder struct {
 type SupplierOrderDetail struct {
 	ThirdPartyOrder
 	OrderDetail OrderDetailForMerchant `gorm:"foreignKey:supplier_order_no;references:order_no" json:"order_detail"`
+}
+
+// MerchantGoodsThread 单线程多线程的商品
+type MerchantGoodsThread struct {
+	ID           uint `gorm:"primarykey"`
+	GoodsID      string
+	SingleThread YN
+}
+
+type MerchantGoods struct {
+	ID           uint `gorm:"primarykey"`
+	MerchantName string
+	GoodsID      string
+	SkuCode      string
+	RelatedCode  string
+	CreatedAt    Time
+	RelatedList  []MerchantGoodsRelated `gorm:"foreignKey:code;references:SkuCode"`
+}
+
+type MerchantGoodsRelated struct {
+	ID              uint   `gorm:"primarykey"`
+	code            string `gorm:"primarykey"`
+	SupplierName    string
+	SupplierGoodsID string
+	Sort            uint
+	Buy             uint
+	ParValue        float64
+	Unit            string
+	Enable          YN
+	CreatedAt       Time
 }
