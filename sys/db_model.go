@@ -69,7 +69,6 @@ type ThirdPartyOrder struct {
 	Remark     string `json:"remark"`
 	OriginData string `json:"origin_data"`
 	FinishTime Time   `json:"finish_time"`
-	UpdatedAt  Time   `json:"updated_at"`
 	CreatedAt  Time   `json:"created_at"`
 }
 
