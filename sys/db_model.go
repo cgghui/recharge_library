@@ -127,12 +127,13 @@ type MerchantGoodsRelated struct {
 }
 
 type MerchantGoodsRelatedTag struct {
-	ID                 uint `gorm:"primarykey"`
-	Code               string
-	CodeDesc           string
-	RelatedNumMerchant uint
-	RelatedNumSupplier uint
-	UpdatedAt          Time
-	CreatedAt          Time
-	RelatedList        []MerchantGoodsRelated `gorm:"foreignKey:code;references:code"`
+	ID                  uint `gorm:"primarykey"`
+	Code                string
+	CodeDesc            string
+	RelatedNumMerchant  uint
+	RelatedNumSupplier  uint
+	UpdatedAt           Time
+	CreatedAt           Time
+	RelatedListSupplier []MerchantGoodsRelated `gorm:"foreignKey:code;references:code"`
+	RelatedListMerchant []MerchantGoods        `gorm:"foreignKey:related_code;references:code"`
 }
