@@ -69,6 +69,7 @@ type ThirdPartyOrder struct {
 	Remark     string `json:"remark"`
 	OriginData string `json:"origin_data"`
 	FinishTime Time   `json:"finish_time"`
+	UpdatedAt  Time   `json:"updated_at"`
 	CreatedAt  Time   `json:"created_at"`
 }
 
@@ -96,6 +97,8 @@ type MerchantGoodsThread struct {
 	MerchantName string
 	GoodsID      string
 	SingleThread YN
+	UpdatedAt    Time
+	CreatedAt    Time
 }
 
 type MerchantGoods struct {
@@ -105,6 +108,7 @@ type MerchantGoods struct {
 	SkuCode      string
 	RelatedCode  string
 	Enable       YN
+	UpdatedAt    Time
 	CreatedAt    Time
 	RelatedList  []MerchantGoodsRelated `gorm:"foreignKey:code;references:related_code"`
 }
@@ -112,7 +116,6 @@ type MerchantGoods struct {
 type MerchantGoodsRelated struct {
 	ID              uint `gorm:"primarykey"`
 	Code            string
-	CodeDesc        string
 	SupplierName    string
 	SupplierGoodsID string
 	Sort            uint
@@ -120,5 +123,16 @@ type MerchantGoodsRelated struct {
 	ParValue        float64
 	Unit            string
 	Enable          YN
+	UpdatedAt       Time
 	CreatedAt       Time
+}
+
+type MerchantGoodsRelatedTag struct {
+	ID          uint `gorm:"primarykey"`
+	Code        string
+	CodeDesc    string
+	RelatedNum  uint
+	UpdatedAt   Time
+	CreatedAt   Time
+	RelatedList []MerchantGoodsRelated `gorm:"foreignKey:code;references:code"`
 }
