@@ -1,6 +1,7 @@
 package fulu
 
 import (
+	"encoding/base64"
 	"fmt"
 	"testing"
 )
@@ -9,6 +10,10 @@ func TestNewApp(t *testing.T) {
 
 	app := NewApp(OpenApiURL, "", "")
 
+	k := []byte("0a091b3aa4324435aab703142518a8f7")
+	b, _ := base64.StdEncoding.DecodeString("9HeOgdv+NpLihh2+5Gm0Mj4L8n/kqz/RItKWUfvZrCU=")
+	ret := DecryptECB(b, k)
+	fmt.Println(ret)
 	//{
 	//	ret, err := app.GoodsListGet(&GoodsListGetParam{
 	//		FirstCategoryID:  0,

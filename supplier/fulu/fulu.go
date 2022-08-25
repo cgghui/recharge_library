@@ -2,7 +2,6 @@ package fulu
 
 import (
 	"bytes"
-	"context"
 	"crypto/md5"
 	"encoding/hex"
 	"encoding/json"
@@ -30,120 +29,34 @@ type App struct {
 
 // NewApp 创建接口实例
 func NewApp(apiUrl, key, secret string) App {
-	return App{OpenApiURL: apiUrl, Key: key, Secret: secret}
-}
-
-// LoopCodeList 当发起充值遇到如下错误代码，自动切换至下一个商品
-var LoopCodeList = []int{3001, 3002, 3003, 3004, 3005, 3008}
-
-func inLoopCodeList(c int) bool {
-	for _, code := range LoopCodeList {
-		if code == c {
-			return true
-		}
+	return App{
+		OpenApiURL: apiUrl,
+		Key:        key,
+		Secret:     secret,
 	}
-	return false
 }
 
-// DirectChannel 为OrderDirectAddChannel提供便利
-type DirectChannel struct {
-	wait     chan struct{}
-	loopWait chan struct{}
-	loopStop bool
-	data     *OrderDirectAddResponse
-	err      error
-}
+// OrderCardAdd 卡密下单接口
+func (a App) OrderCardAdd(arg *OrderCardAddParam) (OrderCardAddResponse, error) {
 
-var ChannelCancel = errors.New("channel cancel")
+	var result OrderCardAddResponse
 
-// GetWait 等待数据反馈
-func (o *DirectChannel) GetWait() <-chan struct{} {
-	return o.wait
-}
-
-// GetData 获取数据
-func (o *DirectChannel) GetData() *OrderDirectAddResponse {
-	return o.data
-}
-
-// GetError 获取错误
-func (o *DirectChannel) GetError() error {
-	return o.err
-}
-
-// loopNext 进入下一次循环
-func (o *DirectChannel) loopNext() {
-	go func() {
-		o.loopWait <- struct{}{}
-	}()
-}
-
-func (o *DirectChannel) sendData(data *OrderDirectAddResponse, err error, isNext bool) {
-	o.data = data
-	o.err = err
-	if isNext {
-		o.loopNext()
+	if arg.CustomerOrderNo == "" {
+		arg.CustomerOrderNo = CreateOrderID()
 	}
-	o.wait <- struct{}{}
-}
 
-func (o *DirectChannel) close() {
-	close(o.wait)
-	close(o.loopWait)
-}
-
-// OrderDirectAddChannel 直充下单接口（多商品轮询channel版）
-func (a App) OrderDirectAddChannel(ctx context.Context, ProductID []int, arg *OrderDirectAddParam) *DirectChannel {
-	channel := &DirectChannel{wait: make(chan struct{}), loopWait: make(chan struct{}), data: nil, err: nil}
-	channel.loopNext()
-	go func() {
-		defer channel.close()
-		var ret OrderDirectAddResponse
-		var err error
-		i := 0
-		for {
-			select {
-			case <-channel.loopWait:
-				if channel.loopStop {
-					channel.sendData(nil, ChannelCancel, false)
-					return
-				}
-				id := ProductID[i]
-				ret, err = a.OrderDirectAdd(arg.Clone(id, EmptyOrderNo))
-				i++
-				ret.ProductID = id
-				if inLoopCodeList(ret.ParentInfo.Code) {
-					if i == len(ProductID) {
-						channel.sendData(&ret, err, false)
-						return
-					}
-					channel.sendData(&ret, err, true) // 如果错误代码位于列表，继续执行后续id
-					break
-				}
-				channel.sendData(&ret, err, false)
-				return
-			case <-ctx.Done():
-				channel.loopStop = true
-			}
-		}
-	}()
-	return channel
-}
-
-// OrderDirectAddLoop 直充下单接口（多商品轮询普通版）
-func (a App) OrderDirectAddLoop(ProductID []int, arg *OrderDirectAddParam) (OrderDirectAddResponse, error) {
-	var ret OrderDirectAddResponse
-	var err error
-	for _, id := range ProductID {
-		ret, err = a.OrderDirectAdd(arg.Clone(id, EmptyOrderNo))
-		if inLoopCodeList(ret.ParentInfo.Code) {
-			continue
-		}
-		if err != nil {
-			return ret, err
-		}
+	parent, data, err := a.httpPost("fulu.order.card.add", arg)
+	if err != nil {
+		return result, err
 	}
-	return ret, err
+	result.ParentInfo = parent
+
+	if err = json.Unmarshal(data, &result); err != nil {
+		return result, err
+	}
+
+	return result, nil
+
 }
 
 // OrderDirectAdd 直充下单接口

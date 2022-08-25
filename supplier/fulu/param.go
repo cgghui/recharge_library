@@ -48,23 +48,23 @@ type GoodsInfoGetParam struct {
 
 // OrderDirectAddParam 直充下单参数
 type OrderDirectAddParam struct {
-	ProductID        int    `json:"product_id"`                   // 商品编号
-	CustomerOrderNo  string `json:"customer_order_no"`            // 外部订单号
-	ChargeAccount    string `json:"charge_account"`               // 充值账号
-	BuyNum           int    `json:"buy_num"`                      // 购买数量
-	ChargeGameName   string `json:"charge_game_name,omitempty"`   // 充值游戏名称
-	ChargeGameRegion string `json:"charge_game_region,omitempty"` // 充值游戏区
-	ChargeGameSrv    string `json:"charge_game_srv,omitempty"`    // 充值游戏服
-	ChargeType       string `json:"charge_type,omitempty"`        // 充值类型
-	ChargePassword   string `json:"charge_password,omitempty"`    // 充值密码，部分游戏类要传
-	ChargeIP         string `json:"charge_ip,omitempty"`          // 下单真实Ip，区域商品要传
-	ContactQQ        string `json:"contact_qq,omitempty"`         // 联系QQ
-	ContactTel       string `json:"contact_tel,omitempty"`        // 联系电话
-	RemainingNumber  int    `json:"remaining_number,omitempty"`   // 剩余数量
-	ChargeGameRole   string `json:"charge_game_role,omitempty"`   // 充值游戏角色
-	CustomerPrice    string `json:"customer_price,omitempty"`     // 外部销售价
-	ShopType         string `json:"shop_type,omitempty"`          // 店铺类型（PDD、淘宝、天猫、京东、苏宁、其他；非必填字段，可忽略
-	ExternalBizID    string `json:"external_biz_id,omitempty"`    // 透传字段
+	ProductID        int     `json:"product_id"`                   // 商品编号
+	CustomerOrderNo  string  `json:"customer_order_no"`            // 外部订单号
+	ChargeAccount    string  `json:"charge_account"`               // 充值账号
+	BuyNum           int     `json:"buy_num"`                      // 购买数量
+	ChargeGameName   string  `json:"charge_game_name,omitempty"`   // 充值游戏名称
+	ChargeGameRegion string  `json:"charge_game_region,omitempty"` // 充值游戏区
+	ChargeGameSrv    string  `json:"charge_game_srv,omitempty"`    // 充值游戏服
+	ChargeType       string  `json:"charge_type,omitempty"`        // 充值类型
+	ChargePassword   string  `json:"charge_password,omitempty"`    // 充值密码，部分游戏类要传
+	ChargeIP         string  `json:"charge_ip,omitempty"`          // 下单真实Ip，区域商品要传
+	ContactQQ        string  `json:"contact_qq,omitempty"`         // 联系QQ
+	ContactTel       string  `json:"contact_tel,omitempty"`        // 联系电话
+	RemainingNumber  int     `json:"remaining_number,omitempty"`   // 剩余数量
+	ChargeGameRole   string  `json:"charge_game_role,omitempty"`   // 充值游戏角色
+	CustomerPrice    float64 `json:"customer_price,omitempty"`     // 外部销售价
+	ShopType         string  `json:"shop_type,omitempty"`          // 店铺类型（PDD、淘宝、天猫、京东、苏宁、其他；非必填字段，可忽略
+	ExternalBizID    string  `json:"external_biz_id,omitempty"`    // 透传字段
 }
 
 func (o *OrderDirectAddParam) Clone(NewProductID int, NewOrderNo string) *OrderDirectAddParam {
@@ -77,4 +77,14 @@ func (o *OrderDirectAddParam) Clone(NewProductID int, NewOrderNo string) *OrderD
 // OrderInfoGetParam 订单查询参数
 type OrderInfoGetParam struct {
 	CustomerOrderNo string `json:"customer_order_no"` // 外部订单号
+}
+
+// OrderCardAddParam 卡密下单参数
+type OrderCardAddParam struct {
+	ProductID       int     `json:"product_id"`
+	BuyNum          int     `json:"buy_num"`
+	CustomerOrderNo string  `json:"customer_order_no"`
+	CustomerPrice   float64 `json:"customer_price,omitempty"`
+	ShopType        string  `json:"shop_type,omitempty"`
+	ExternalBizID   string  `json:"external_biz_id,omitempty"`
 }

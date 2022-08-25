@@ -81,3 +81,10 @@ type Card struct {
 	CardType     string `json:"card_type"`     // 卡类型 0.普通卡密 1.二维码 2.短链
 	CardDeadline string `json:"card_deadline"` // 卡密有效期
 }
+
+// OrderCardAddResponse 卡密
+type OrderCardAddResponse struct {
+	ParentInfo *ParentBody `json:"parent_info"`
+	OrderPublic
+	ProductID int `json:"product_id"` // 商品Idx
+}
