@@ -52,10 +52,10 @@ type ResponseOrderQuery struct {
 }
 
 type Card struct {
-	Number   string `json:"number"`   // 卡号
-	Password string `json:"password"` // 密码
-	Type     string `json:"type"`     // 卡类型 0.普通卡密 1.二维码 2.短链
-	Deadline string `json:"deadline"` // 卡密有效期
+	Number   string    `json:"number"`   // 卡号
+	Password string    `json:"password"` // 密码
+	Type     sys.CardT `json:"type"`     // 卡类型 0.普通卡密 1.二维码 2.短链
+	Deadline string    `json:"deadline"` // 卡密有效期
 }
 
 type ResponseGoodsQuery struct {

@@ -86,3 +86,18 @@ func (s YN) String() string {
 }
 
 ///////////////////////////////
+// 卡类型 0.普通卡密 1.二维码 2.短链
+
+type CardT int
+
+const (
+	Normal CardT = 0
+	Qrcode CardT = 1
+	Link   CardT = 2
+)
+
+func (s CardT) String() string {
+	return strconv.Itoa(int(s))
+}
+
+///////////////////////////////

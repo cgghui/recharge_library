@@ -76,10 +76,10 @@ func (o OrderInfoGetResponse) RechargeStatusCheck(s sys.ST) bool {
 }
 
 type Card struct {
-	CardNumber   string `json:"card_number"`   // 卡号
-	CardPWD      string `json:"card_pwd"`      // 密码
-	CardType     string `json:"card_type"`     // 卡类型 0.普通卡密 1.二维码 2.短链
-	CardDeadline string `json:"card_deadline"` // 卡密有效期
+	CardNumber   string    `json:"card_number"`   // 卡号
+	CardPWD      string    `json:"card_pwd"`      // 密码
+	CardType     sys.CardT `json:"card_type"`     // 卡类型 0.普通卡密 1.二维码 2.短链
+	CardDeadline string    `json:"card_deadline"` // 卡密有效期
 }
 
 // OrderCardAddResponse 卡密
