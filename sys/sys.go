@@ -14,9 +14,9 @@ import (
 
 var (
 	Conn *gorm.DB
-	L    = "127.0.0.1"
-	U    = "root"
-	P    = "root"
+	L    string
+	U    string
+	P    string
 )
 
 func ConnectMySQL() error {
